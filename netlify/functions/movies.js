@@ -63,5 +63,6 @@ moviesReturned.numResults = moviesReturned.numResults + 1
       statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
       body: JSON.stringify(moviesReturned)  // a string of data
     }
-  } // else statement ends
-}    
+  } 
+}   // else statement ends
+

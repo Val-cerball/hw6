@@ -22,26 +22,46 @@ exports.handler = async function(event) {
   let year = event.queryStringParameters.year
   let genre = event.queryStringParameters.genre
   
-  if (year == undefined || genre == undefined) {
+  if (year == undefined || genre == undefined || genre ==`` || year ==``) {
     return {
       statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-      body: `Nope!` // a string of data
+      body: `Please type genre and year!` // a string of data
     }
   }
   else {
-    let returnValue = {
+    // new array of movies to be returned by the API data
+
+    let moviesReturned = {
       numResults: 0,
       movies: []
     }
 
+    //loop through the posts
     for (let i=0; i < moviesFromCsv.length; i++) {
 
     }
+    // store listing in memory
+    let movie = moviesFromCsv[i]
+
+    // if the year is not 0 
+    if (movie.startYear == year && movie.genres.includes(genre) && movie.genres != `\\N` && movie.runtimeMinutes != `\\N`) {
+      
+    // create a new object containing the pertinent fields
+      let selectedMovie = {
+        title: movie.primaryTitle,
+        releaseYear: movie.startYear,
+        movieGenre: movie.genres
+      }
+    // push the object to the final array
+moviesReturned.movies.push(selectedMovie)
+moviesReturned.numResults = moviesReturned.numResults + 1
+    }
+  }
 
     // a lambda function returns a status code and a string of data
     return {
       statusCode: 200, // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-      body: `Hello from the back-end!` // a string of data
+      body: JSON.stringify(moviesReturned)  // a string of data
     }
   }
 }

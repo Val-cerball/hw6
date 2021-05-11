@@ -46,7 +46,7 @@ exports.handler = async function(event) {
     // if the year is not 0 
     if (movie.startYear == year && movie.genres.includes(genre) && movie.genres != `\\N` && movie.runtimeMinutes != `\\N`) {
       
-    // create a new object containing the pertinent fields
+    // create a new object containing pertinent fields
       let selectedMovie = {
         title: movie.primaryTitle,
         releaseYear: movie.startYear,
